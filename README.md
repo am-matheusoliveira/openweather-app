@@ -12,7 +12,6 @@ Com ele, o usuário pode realizar consultas de previsão do tempo com base em um
 * Plugin DataTables
 * Plugin Select2
 
-
 ### Imagens do Sistema
 
 ### Instalação
@@ -54,9 +53,9 @@ A aplicação estará disponível em `http://localhost/openweather-app`.<br>
 ### Conclusão
 
 Este projeto demonstra minhas habilidades no desenvolvimento de Aplicativos com com PHP, Laravel e MySQL, incluindo:
-* Desenvolvimento da interface do usuário para iteragir com o sistema
-* Manipulação de respostas em formato Json
-* Consulmo de API's usando o Framework Laravel
+* Desenvolvimento da interface do usuário para interagir com o sistema
+* Manipulação de respostas em formato JSON
+* Consumo de API's usando o Framework Laravel
 * Modelagem de dados usando os recursos do Framework
 * Manipulação de Banco de Dados SQL
 ---
