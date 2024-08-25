@@ -1,7 +1,7 @@
 # OpenWeatherMap - API Consult
 
-Este projeto realiza o consumo de uma API Publica do OpenWeatherMap que retorna dados meteorológicos.</br>
-Com ele, o usuário pode realizar consultas de previsão do tempo com base em uma cidade, ele foi desenvolvido com PHP, Laravel e MySQL.
+ Este projeto realiza o consumo de uma API Pública do OpenWeatherMap que retorna dados meteorológicos.</br>
+Com ele, o usuário pode realizar consultas de previsão do tempo com base em uma cidade, ele foi desenvolvido com PHP, Laravel e MySQL. 
 
 ### Ferramentas
 * PHP 8.0
@@ -11,7 +11,6 @@ Com ele, o usuário pode realizar consultas de previsão do tempo com base em um
 * Jquery
 * Plugin DataTables
 * Plugin Select2
-
 
 ### Imagens do Sistema
 
@@ -45,7 +44,7 @@ DB_PASSWORD=sua_senha - para este aplicativo a senha:
 php artisan key:generate
 ```
 ### 5. Criar o Banco de Dados - Sistema
-Em seu Gerenciador de Banco de Dados execute o script SQL que esta na pasta `database-app/script-database.sql` para criar o banco de dados e as tabela de Cidades.
+Em seu Gerenciador de Banco de Dados execute o script SQL que esta na pasta `database-app/script-database.sql` para criar o Banco de Dados e a Tabela de Cidades.
 
 ### 6. Migrar o Banco de Dados - Tabelas do Laravel e do Aplicativo
 ```
@@ -57,9 +56,9 @@ A aplicação estará disponível em `http://localhost/openweather-app`.<br>
 ### Conclusão
 
 Este projeto demonstra minhas habilidades no desenvolvimento de Aplicativos com com PHP, Laravel e MySQL, incluindo:
-* Desenvolvimento da interface do usuário para iteragir com o sistema
-* Manipulação de respostas em formato Json
-* Consulmo de API's usando o Framework Laravel
+* Desenvolvimento da interface do usuário para interagir com o sistema
+* Manipulação de respostas em formato JSON
+* Consumo de API's usando o Framework Laravel
 * Modelagem de dados usando os recursos do Framework
 * Manipulação de Banco de Dados SQL
 ---
