@@ -42,7 +42,7 @@ DB_PASSWORD=sua_senha
 php artisan key:generate
 ```
 ### 5. Criar o Banco de Dados - Sistema
-Em seu Gerenciador de Banco de Dados execute o script SQL que esta na pasta `database-app/script-database.sql` para criar o banco de dados e as tabela de Cidades.
+Em seu Gerenciador de Banco de Dados execute o script SQL que esta na pasta `database-app/script-database.sql` para criar o Banco de Dados e a Tabela de Cidades.
 
 ### 6. Migrar o Banco de Dados - Tabelas do Laravel e do Aplicativo
 ```
