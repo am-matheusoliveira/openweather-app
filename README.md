@@ -55,7 +55,7 @@ A aplicação estará disponível em `http://localhost/openweather-app`.<br>
 
 ### Conclusão
 
-Este projeto demonstra minhas habilidades no desenvolvimento de Aplicativos com com PHP, Laravel e MySQL, incluindo:
+Este projeto demonstra minhas habilidades no desenvolvimento de Aplicativos com PHP, Laravel e MySQL, incluindo:
 * Desenvolvimento da interface do usuário para interagir com o sistema
 * Manipulação de respostas em formato JSON
 * Consumo de API's usando o Framework Laravel
