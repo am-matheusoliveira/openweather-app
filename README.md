@@ -51,7 +51,7 @@ Em seu Gerenciador de Banco de Dados execute o script SQL que esta na pasta `dat
 php artisan migrate
 ```
 ### 7. Acessando o Aplicativo
-A aplicação estará disponível em `http://localhost/openweather-app`.<br>
+O aplicativo estará disponível em `http://localhost/openweather-app`.<br>
 
 ### Conclusão
 
