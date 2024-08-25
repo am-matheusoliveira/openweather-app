@@ -1,7 +1,7 @@
 # OpenWeatherMap - API Consult
 
-Este projeto realiza o consumo de uma API Publica do OpenWeatherMap que retorna dados meteorológicos.</br>
-Com ele, o usuário pode realizar consultas de previsão do tempo com base em uma cidade, ele foi desenvolvido com PHP, Laravel e MySQL.
+ Este projeto realiza o consumo de uma API Pública do OpenWeatherMap que retorna dados meteorológicos.</br>
+Com ele, o usuário pode realizar consultas de previsão do tempo com base em uma cidade, ele foi desenvolvido com PHP, Laravel e MySQL. 
 
 ### Ferramentas
 * PHP 8.0
