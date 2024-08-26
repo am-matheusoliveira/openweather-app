@@ -22,7 +22,7 @@ class HomeController extends Controller
      */    
     public function index(Home $home)
     {   
-        // Buscando os Cidades
+        // Buscando as Cidades
         $result_cidade = $home->cidade_select();
 
         return view('home', compact('result_cidade'));
