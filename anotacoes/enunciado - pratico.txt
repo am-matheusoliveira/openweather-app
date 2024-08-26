@@ -11,7 +11,8 @@ Você deverá criar uma aplicação simples em PHP, Laravel e Mysql que consuma 
         (Opcional) Permitir que o usuário filtre ou ordene os dados exibidos na interface.
 
     Estrutura do Banco de Dados:
-        Defina a estrutura da tabela no MySQL para armazenar os dados. A estrutura deve estar normalizada e seguir boas práticas de design de banco de dados.
+        Defina a estrutura da tabela no MySQL para armazenar os dados. 
+        A estrutura deve estar normalizada e seguir boas práticas de design de banco de dados.
         Crie as migrations necessárias para gerar as tabelas.
 
     Validação e Tratamento de Erros:

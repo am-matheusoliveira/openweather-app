@@ -128,7 +128,6 @@
                 $('#form-consult').submit();
             else                
                 $('#btn-open-modal').click();
-
         });
     });
 </script>

@@ -95,7 +95,7 @@ class WeatherController extends Controller
             ]);
 
             // Salvar condições climáticas
-            foreach ($data['weather'] as $condition) {
+            foreach ($data['weather'] as $key => $condition) {
                 WeatherCondition::create([
                     'report_id'    => $report->id,
                     'condition_id' => $condition['id'],
@@ -103,6 +103,9 @@ class WeatherController extends Controller
                     'description'  => $condition['description'],
                     'icon'         => $condition['icon']
                 ]);
+
+                // Traduzindo a condição climatica direto no JSON para apresentação na view
+                $data['weather'][$key]['main'] = $translations[$condition['main']] ?? $condition['main'];
             }
 
             // Salvar vento
@@ -126,11 +129,11 @@ class WeatherController extends Controller
     // Retorna para a view de listagem dos Dados climáticas
     public function weather(){
         
-        // Captura a mensagem de erro ou sucesso 
+        // Recuperando dados da sessão
         $message = session('message');
         $data = session('weatherData');
 
-        // Retorna para a view com a mensagem
+        // Retorna para a view com os dados acima
         return view('weather', compact('message','data'));
     }
 

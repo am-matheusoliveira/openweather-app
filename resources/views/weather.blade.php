@@ -35,7 +35,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>                                    
                                     </div>
                                 </div>
-                                <!-- Tabela com os dados que venho da API -->
+                                <!-- Tabela com os dados que veio da API -->
                                 <div class="table-responsive">
                                     <span class="h5 mx-2 fw-bolder">Registro da consulta da API</span>
                                     <table class="table">
