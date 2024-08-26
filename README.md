@@ -4,7 +4,7 @@ Este projeto realiza o consumo de uma API Pública do OpenWeatherMap que retorna
 Com ele, o usuário pode realizar consultas de previsão do tempo com base em uma cidade, ele foi desenvolvido com PHP, Laravel e MySQL. 
 
 ## Hospedado na Amazon AWS EC2
-Este projeto esta hospedado na AWS você acessa-lo agora mesmo clicando no link: [OpenWeather App](http://ec2-52-67-60-157.sa-east-1.compute.amazonaws.com/openweather-app) 
+Este projeto está hospedado no serviço AWS EC2 você pode acessá-lo agora mesmo clicando no link: [OpenWeather App](http://ec2-52-67-60-157.sa-east-1.compute.amazonaws.com/openweather-app) 
 
 ### Ferramentas
 * PHP 8.0
@@ -14,6 +14,7 @@ Este projeto esta hospedado na AWS você acessa-lo agora mesmo clicando no link:
 * Jquery
 * Plugin DataTables
 * Plugin Select2
+* AWS EC2
 
 ### Imagens do Sistema
 ## Tela inicial
