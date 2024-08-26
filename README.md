@@ -14,25 +14,21 @@ Com ele, o usuário pode realizar consultas de previsão do tempo com base em um
 
 ### Imagens do Sistema
 ## Tela inicial
-Nessa tela temos um formulario onde o usuário pode selecionar uma Cidade(Somente cidades brasileiras) ou caso ele prefira, basta digitar o nome de uma Cidade.</br>
-OBS: Os dados que aparecem na caixa de seleção são de um arquivo JSON fornecido pela propria Open Weather Map.
+Nessa tela temos um formulário onde o usuário pode selecionar uma cidade (Somente cidades brasileiras) ou, caso ele prefira, basta digitar o nome de uma cidade.</br>
+OBS: Os dados que aparecem na caixa de seleção são de um arquivo JSON fornecido pela própria Open Weather Map.
 
 ## Tela inicial - Mensagem de aviso
-Caso o usuário tente realizar uma consuta sem ter fornecido uma Cidade o sistema o informara que o forncimento de uma cidade e obrigaorio.
+Caso o usuário tente realizar uma consulta sem ter fornecido uma cidade, o sistema o informará que o fornecimento de uma cidade é obrigatório.
 
 ## Tela de listagem das consições climaticas - Mensagem de Sucesso
-Caso a consuta retorne sucesso os dados são retornados para esta tela e uma mensagem de Sucesso sera mostrada para o usuário.</br>
-Nesta tela, quando a consuta retornar sucesso aprece-ra duas tabelas uma que lista os dados da consulta atual que o usuário solicitou e a outra abaixo se trata das consutas anteriores e também da consulta atual que p usuário fez.</br>
-Também nesta tela o usuário tem a opção de realizar filtros por qualquer coluna da tabela ou realizar ordenações dos dados por qualquer coluna, incluindo páginação dos dados.
+Caso a consulta retorne sucesso, os dados são retornados para esta tela e uma mensagem de sucesso será mostrada para o usuário.</br>
+Nesta tela, quando a consulta retornar sucesso, serão mostradas duas tabelas, uma que lista os dados da consulta atual que o usuário solicitou e a outra abaixo, se trata das consultas anteriores e também da consulta atual que o usuário fez.</br>
+Também nesta tela, o usuário tem a opção de realizar filtros por qualquer coluna da tabela ou realizar ordenações dos dados por qualquer coluna, incluindo paginação dos dados.
 
 ## Tela de listagem das condições climaticas - Mensagem de Erro
-Caso a consuta retorne erro uma mensagem de Erro sera mostrada para o usuário.</br>
-Nesta tela, quando a consuta retorna erro somente a os dados já salvos no banco de dados seram msotrado.</br>
-Também nesta tela o usuário tem a opção de realizar filtros por qualquer coluna da tabela ou realizar ordenações dos dados por qualquer coluna, incluindo páginação dos dados.
-
-
-## Tela inicial
-
+Caso a consulta retorne erro, uma mensagem de erro será mostrada para o usuário.</br>
+Nesta tela, quando a consulta retorna erro, somente os dados já salvos no banco de dados serão mostrados.</br>
+Também nesta tela, o usuário tem a opção de realizar filtros por qualquer coluna da tabela ou realizar ordenações dos dados por qualquer coluna, incluindo paginação dos dados.
 
 ### Instalação
 Siga os passos abaixo para configurar e executar o projeto em sua máquina local.
