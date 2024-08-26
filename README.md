@@ -14,18 +14,22 @@ Com ele, o usuário pode realizar consultas de previsão do tempo com base em um
 
 ### Imagens do Sistema
 ## Tela inicial
+![pagina-inicial-mensagem-aviso](https://github.com/user-attachments/assets/5c327634-2117-44df-b326-9f3328cde800)
 Nessa tela temos um formulário onde o usuário pode selecionar uma cidade (Somente cidades brasileiras) ou, caso ele prefira, basta digitar o nome de uma cidade.</br>
 OBS: Os dados que aparecem na caixa de seleção são de um arquivo JSON fornecido pela própria Open Weather Map.
 
 ## Tela inicial - Mensagem de aviso
+![pagina-inicial](https://github.com/user-attachments/assets/571544ab-2ce1-4436-b033-b847d93246a1)
 Caso o usuário tente realizar uma consulta sem ter fornecido uma cidade, o sistema o informará que o fornecimento de uma cidade é obrigatório.
 
 ## Tela de listagem das consições climaticas - Mensagem de Sucesso
+![listagem-dos-dados-consuta-api-banco-de-dados-sucesso](https://github.com/user-attachments/assets/a4cfd2f4-1e62-4d9f-be00-b2259f6b43be)
 Caso a consulta retorne sucesso, os dados são retornados para esta tela e uma mensagem de sucesso será mostrada para o usuário.</br>
 Nesta tela, quando a consulta retornar sucesso, serão mostradas duas tabelas, uma que lista os dados da consulta atual que o usuário solicitou e a outra abaixo, se trata das consultas anteriores e também da consulta atual que o usuário fez.</br>
 Também nesta tela, o usuário tem a opção de realizar filtros por qualquer coluna da tabela ou realizar ordenações dos dados por qualquer coluna, incluindo paginação dos dados.
 
 ## Tela de listagem das condições climaticas - Mensagem de Erro
+![listagem-dos-dados-consulta-api-banco-de-dados-erro](https://github.com/user-attachments/assets/9d2ec223-55b1-4c5f-8301-c4d9d5f47371)
 Caso a consulta retorne erro, uma mensagem de erro será mostrada para o usuário.</br>
 Nesta tela, quando a consulta retorna erro, somente os dados já salvos no banco de dados serão mostrados.</br>
 Também nesta tela, o usuário tem a opção de realizar filtros por qualquer coluna da tabela ou realizar ordenações dos dados por qualquer coluna, incluindo paginação dos dados.
