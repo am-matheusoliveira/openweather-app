@@ -14,12 +14,12 @@ Com ele, o usuário pode realizar consultas de previsão do tempo com base em um
 
 ### Imagens do Sistema
 ## Tela inicial
-![pagina-inicial-mensagem-aviso](https://github.com/user-attachments/assets/5c327634-2117-44df-b326-9f3328cde800)
+![pagina-inicial](https://github.com/user-attachments/assets/571544ab-2ce1-4436-b033-b847d93246a1)
 Nessa tela temos um formulário onde o usuário pode selecionar uma cidade (Somente cidades brasileiras) ou, caso ele prefira, basta digitar o nome de uma cidade.</br>
 OBS: Os dados que aparecem na caixa de seleção são de um arquivo JSON fornecido pela própria Open Weather Map.
 
 ## Tela inicial - Mensagem de aviso
-![pagina-inicial](https://github.com/user-attachments/assets/571544ab-2ce1-4436-b033-b847d93246a1)
+![pagina-inicial-mensagem-aviso](https://github.com/user-attachments/assets/5c327634-2117-44df-b326-9f3328cde800)
 Caso o usuário tente realizar uma consulta sem ter fornecido uma cidade, o sistema o informará que o fornecimento de uma cidade é obrigatório.
 
 ## Tela de listagem das consições climaticas - Mensagem de Sucesso
