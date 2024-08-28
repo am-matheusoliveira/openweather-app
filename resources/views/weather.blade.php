@@ -143,7 +143,7 @@
             new DataTable('#principal-table', {
                 processing: true,
                 serverSide: true,
-                ajax: "{{ url('/weatherData') }}",
+                ajax: "{{ route('weatherData') }}",
                 scrollY: "70vh",
                 scrollX: true,       
                 scrollCollapse: true,
