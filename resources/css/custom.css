@@ -26,6 +26,8 @@
 
 /* AUMENTA O TAMANHO DA CAIXA DE PESQUISA */
 #principal-table_wrapper input[type="search"] {
+    width: 25em;
+    max-width: 20em;
     border-radius: 5px;
 }
 
