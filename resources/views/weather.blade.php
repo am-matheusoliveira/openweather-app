@@ -10,7 +10,7 @@
 
                             <div class="row card-header m-0">
                                 <div class="col-sm-2 text-center">
-                                    <a href="{{ url('/') }}" class="btn btn-sm btn-primary">Retornar</a>
+                                    <a href="{{ url('/') }}" class="w-100 btn btn-sm btn-primary">Retornar</a>
                                 </div>
 
                                 <div class="col-sm-10 text-center">
