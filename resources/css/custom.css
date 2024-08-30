@@ -46,4 +46,7 @@
 /* Alteração do padding da paginação do datatables*/
 ul.pagination li > a{
     padding: 5px;
+    margin: 5px;
+    border-radius: 2px;
+    height: 35px;
 }
