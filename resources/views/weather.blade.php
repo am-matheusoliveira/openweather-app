@@ -7,10 +7,15 @@
                 <div class="card">
                     <div class="card-body p-0">
                         <div class="card">
-                            <div class="card-header d-flex justify-content-between">
-                                <a href="{{ url('/') }}" class="btn btn-sm btn-primary">Retornar</a>
-                                <strong class="text-center mx-auto">{{ __('Condições climáticas') }}</strong>
-                                <a href="" class="btn btn-sm btn-primary invisible">Novo Registro</a>
+
+                            <div class="row card-header m-0">
+                                <div class="col-sm-2">
+                                    <a href="{{ url('/') }}" class="btn btn-sm btn-primary">Retornar</a>
+                                </div>
+
+                                <div class="col-sm text-center position-absolute">
+                                    <strong>{{ __('Condições climáticas') }}</strong>
+                                </div>
                             </div>
 
                             <!-- Icones -->
