@@ -13,7 +13,7 @@
                                     <a href="{{ url('/') }}" class="btn btn-sm btn-primary">Retornar</a>
                                 </div>
 
-                                <div class="col-sm text-center position-absolute">
+                                <div class="col-sm text-center position-absolute" style="margin-left: -2em;">
                                     <strong>{{ __('Condições climáticas') }}</strong>
                                 </div>
                             </div>
