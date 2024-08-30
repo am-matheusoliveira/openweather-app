@@ -9,11 +9,11 @@
                         <div class="card">
 
                             <div class="row card-header m-0">
-                                <div class="col-sm-2">
+                                <div class="col-sm-2 text-center">
                                     <a href="{{ url('/') }}" class="btn btn-sm btn-primary">Retornar</a>
                                 </div>
 
-                                <div class="col-sm text-center position-absolute" style="margin-left: -2em;">
+                                <div class="col-sm-10 text-center">
                                     <strong>{{ __('Condições climáticas') }}</strong>
                                 </div>
                             </div>
