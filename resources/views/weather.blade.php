@@ -48,9 +48,6 @@
                                             <th class="col-md-custom">Cidade</th>
                                             <th class="col-md-custom">Pais</th>
                                             <th class="col-md-custom">Data e Hora</th>
-                                            {{-- <th class="col-md-custom">Longitude</th> --}}
-                                            {{-- <th class="col-md-custom">Latitude</th> --}}
-                                            {{-- <th class="col-md-custom">Fuso horário</th> --}}
                                             <th class="col-md-custom">Temperatura</th>
                                             <th class="col-md-custom">Sensação térmica</th>
                                             <th class="col-md-custom">Temp mínima</th>
@@ -70,10 +67,7 @@
                                             <tr>
                                                 <td>{{ $data['name'] }}</td>
                                                 <td>{{ $data['sys']['country'] }}</td>
-                                                <td>{{ \Carbon\Carbon::createFromTimestamp($data['dt'])->format('d/m/Y H:i:s') }}</td>                                                
-                                                {{-- <td>{{ $data['coord']['lon'] }}</td> --}}
-                                                {{-- <td>{{ $data['coord']['lat'] }}</td> --}}
-                                                {{-- <td>{{ $data['timezone'] }}</td> --}}
+                                                <td>{{ $data['dt'] }}</td>                                                
                                                 <td>{{ $data['main']['temp'] }} °C</td>
                                                 <td>{{ $data['main']['feels_like'] }} °C</td>
                                                 <td>{{ $data['main']['temp_min'] }} °C</td>
@@ -81,8 +75,8 @@
                                                 <td>{{ $data['main']['pressure'] }} hPa</td>
                                                 <td>{{ $data['main']['humidity'] }} %</td>
                                                 <td>{{ $data['visibility'] }} m</td>                                                                                            
-                                                <td>{{ \Carbon\Carbon::createFromTimestamp($data['sys']['sunrise'])->format('d/m/Y H:i:s') }}</td>
-                                                <td>{{ \Carbon\Carbon::createFromTimestamp($data['sys']['sunset'])->format('d/m/Y H:i:s')  }}</td>
+                                                <td>{{ $data['sys']['sunrise'] }}</td>
+                                                <td>{{ $data['sys']['sunset'] }}</td>
                                                 <td>{{ $data['wind']['speed'] }} m/s</td>
                                                 <td>{{ $data['wind']['deg'] }}°</td>
                                                 <td>{{ $data['clouds']['all'] }} %</td>
@@ -110,9 +104,6 @@
                                     <th class="col-md-custom">Cidade</th>
                                     <th class="col-md-custom">Pais</th>
                                     <th class="col-md-custom">Data e Hora</th>
-                                    {{-- <th class="col-md-custom">Longitude</th> --}}
-                                    {{-- <th class="col-md-custom">Latitude</th> --}}
-                                    {{-- <th class="col-md-custom">Fuso horário</th> --}}
                                     <th class="col-md-custom">Temperatura</th>
                                     <th class="col-md-custom">Sensação térmica</th>
                                     <th class="col-md-custom">Temp mínima</th>
@@ -158,9 +149,6 @@
                     {data: 'nome_cidade',        name: 'nome_cidade'},
                     {data: 'pais',               name: 'pais'},
                     {data: 'timestamp',          name: 'timestamp'},
-                    // {data: 'longitude',          name: 'longitude'},
-                    // {data: 'latitude',           name: 'latitude'},
-                    // {data: 'fuso_horario',       name: 'fuso_horario'},
                     {data: 'temperatura',        name: 'temperatura'},
                     {data: 'sensacao_termica',   name: 'sensacao_termica'},
                     {data: 'temp_minima',        name: 'temp_minima'},

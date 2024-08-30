@@ -89,9 +89,9 @@ class WeatherController extends Controller
                 'pressure'    => $data['main']['pressure'],
                 'humidity'    => $data['main']['humidity'],
                 'visibility'  => $data['visibility'],
-                'timestamp'   => Carbon::createFromTimestamp($data['dt'])->format('Y-m-d H:i:s'),
-                'sunrise'     => Carbon::createFromTimestamp($data['sys']['sunrise'])->format('Y-m-d H:i:s'),
-                'sunset'      => Carbon::createFromTimestamp($data['sys']['sunset'])->format('Y-m-d H:i:s'),
+                'timestamp'   => date('Y-m-d H:i:s', ($data['dt'] + $data['timezone'])),
+                'sunrise'     => date('Y-m-d H:i:s', ($data['sys']['sunrise'] + $data['timezone'])),
+                'sunset'      => date('Y-m-d H:i:s', ($data['sys']['sunset']  + $data['timezone'])),
             ]);
 
             // Salvar condições climáticas
@@ -103,8 +103,11 @@ class WeatherController extends Controller
                     'description'  => $condition['description'],
                     'icon'         => $condition['icon']
                 ]);
-
-                // Traduzindo a condição climatica direto no JSON para apresentação na view
+                
+                // Configurando os campos que seram apresentados na View a partir do JSON da API
+                $data['dt']                    = date('d/m/Y H:i:s', ($data['dt']             + $data['timezone']));
+                $data['sys']['sunset']         = date('d/m/Y H:i:s', ($data['sys']['sunset']  + $data['timezone']));
+                $data['sys']['sunrise']        = date('d/m/Y H:i:s', ($data['sys']['sunrise'] + $data['timezone']));
                 $data['weather'][$key]['main'] = $translations[$condition['main']] ?? $condition['main'];
             }
 
@@ -150,9 +153,6 @@ class WeatherController extends Controller
                     return [
                         'nome_cidade' => $report->city->name,
                         'pais' => $report->city->country,
-                        // 'longitude' => $report->city->longitude,
-                        // 'latitude' => $report->city->latitude,
-                        // 'fuso_horario' => $report->timezone,
                         'temperatura' => $report->temperature .' °C',
                         'sensacao_termica' => $report->feels_like .' °C',
                         'temp_minima' => $report->temp_min . ' °C',
@@ -160,9 +160,9 @@ class WeatherController extends Controller
                         'pressao' => $report->pressure . ' hPa',
                         'umidade' => $report->humidity . ' %',
                         'visibilidade' => $report->visibility . ' m',
-                        'timestamp' =>  date('d/m/Y H:i:s', strtotime($report->timestamp)),
-                        'nascer_do_sol' =>  date('d/m/Y H:i:s', strtotime($report->sunrise)),
-                        'por_do_sol' => date('d/m/Y H:i:s', strtotime($report->sunset)),
+                        'timestamp'     => date('d/m/Y H:i:s', strtotime($report->timestamp)),
+                        'nascer_do_sol' => date('d/m/Y H:i:s', strtotime($report->sunrise)),
+                        'por_do_sol'    => date('d/m/Y H:i:s', strtotime($report->sunset)),
                         'velocidade_vento' => optional($report->wind)->speed . ' m/s',
                         'direcao_vento' => optional($report->wind)->direction . ' °',
                         'nebulosidade' => optional($report->cloud)->cloudiness . ' %',
