@@ -130,22 +130,5 @@
                 $('#btn-open-modal').click();
         });  
     });
-
-    window.addEventListener('beforeunload', function() {
-        alert('Oi');
-        sessionStorage.setItem('lastVisited', window.location.href);
-    });
-
-    window.addEventListener('load', function() {
-        alert('Oi');
-        var lastVisited = sessionStorage.getItem('lastVisited');
-        alert(lastVisited);
-        if (lastVisited) {
-            sessionStorage.removeItem('lastVisited');
-            if (lastVisited.includes('fetchWeatherData')) {
-                window.location.href = '/openweather-app/weather';
-            }
-        }
-    });          
 </script>
 @endsection
