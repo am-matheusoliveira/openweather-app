@@ -177,20 +177,5 @@
             });
         });
         
-        // Tratamento de erros para a versão mobile
-        window.addEventListener('beforeunload', function() {
-            sessionStorage.setItem('lastVisited', window.location.href);
-        });
-        
-        // Carregando o estado anterior ao dar um refresh na página 
-        window.addEventListener('load', function() {
-            var lastVisited = sessionStorage.getItem('lastVisited');
-            if (lastVisited) {
-                sessionStorage.removeItem('lastVisited');
-                if (lastVisited.includes('fetchWeatherData')) {
-                    window.location.href = '/openweather-app/weather';
-                }
-            }
-        });        
     </script>   
 @endsection
