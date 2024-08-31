@@ -9,7 +9,6 @@ use App\Models\WeatherReport;
 use App\Models\WeatherCondition;
 use App\Models\Wind;
 use App\Models\Cloud;
-use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 
 class WeatherController extends Controller
@@ -126,18 +125,15 @@ class WeatherController extends Controller
 
             return redirect()->route('weather')->with(['messageSuccess' => 'Dados salvos com sucesso!', 'weatherData' => $data]);
         }
+
         return redirect()->route('weather')->with(['messageDanger' => 'Erro ao consultar a API.']);
     }
-
+    
     // Retorna para a view de listagem dos Dados climáticas
     public function weather(){
         
-        // Recuperando dados da sessão
-        $message = session('message');
-        $data = session('weatherData');
-
         // Retorna para a view com os dados acima
-        return view('weather', compact('message','data'));
+        return view('weather', ['data' => session('weatherData')]);
     }
 
     // FUNÇÃO QUE RETORNA OS DADOS DA VIEW 'weather' E RENDERIZA O DataTables
