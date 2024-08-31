@@ -123,11 +123,10 @@ class WeatherController extends Controller
                 'cloudiness' => $data['clouds']['all']
             ]);
 
-            // return redirect()->route('weather')->with(['messageSuccess' => 'Dados salvos com sucesso!', 'weatherData' => $data]);
-            return redirect()->intended('http://ec2-52-67-60-157.sa-east-1.compute.amazonaws.com/openweather-app/weather');
+            return redirect()->route('weather')->with(['messageSuccess' => 'Dados salvos com sucesso!', 'weatherData' => $data]);            
         }
-        return redirect()->intended('http://ec2-52-67-60-157.sa-east-1.compute.amazonaws.com/openweather-app/weather');
-        // return redirect()->route('weather')->with(['messageDanger' => 'Erro ao consultar a API.']);
+        
+        return redirect()->route('weather')->with(['messageDanger' => 'Erro ao consultar a API.']);
     }
     
     // Retorna para a view de listagem dos Dados climáticas
