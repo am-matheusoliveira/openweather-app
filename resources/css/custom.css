@@ -50,3 +50,9 @@ ul.pagination li > a{
     border-radius: 2px;
     height: 35px;
 }
+
+/* Icones das condições climaticas */
+img {
+    width: 40px;
+    height: 40px;
+}

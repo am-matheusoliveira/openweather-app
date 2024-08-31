@@ -62,6 +62,7 @@
                                             <th class="col-md-custom">Nebulosidade</th>
                                             <th class="col-md-custom">condição principal</th>
                                             <th class="col-md-custom">Descrição condição</th>
+                                            <th class="col-md-custom">Icone condição</th>
                                         </thead>
                                         <tbody>                           
                                             <tr>
@@ -81,7 +82,10 @@
                                                 <td>{{ $data['wind']['deg'] }}°</td>
                                                 <td>{{ $data['clouds']['all'] }} %</td>
                                                 <td>{{ $data['weather'][0]['main'] }}</td>
-                                                <td>{{ $data['weather'][0]['description'] }}</td>                                                
+                                                <td>{{ $data['weather'][0]['description'] }}</td>
+                                                <td>
+                                                    <img src="http://openweathermap.org/img/wn/{{ $data['weather'][0]['icon'] }}.png" alt="Weather Icon">
+                                                </td>
                                             </tr>            
                                         </tbody>
                                   </table>
@@ -118,6 +122,7 @@
                                     <th class="col-md-custom">Nebulosidade</th>
                                     <th class="col-md-custom">Condição principal</th>
                                     <th class="col-md-custom">Descrição da condição</th>
+                                    <th class="col-md-custom">Icone condição</th>
                                 </thead>
                                 <tbody>                                       
                                 </tbody>
@@ -163,10 +168,14 @@
                     {data: 'nebulosidade',       name: 'nebulosidade'},
                     {data: 'condicao_principal', name: 'condicao_principal'},
                     {data: 'descricao_condicao', name: 'descricao_condicao'},
+                    {data: 'icon_code_condicao', name: 'icon_code_condicao', 
+                        render: function(data, type, row) { 
+                            return '<img src="http://openweathermap.org/img/wn/'+data+'.png" alt="Weather Icon">'; }
+                    },
                 ],
-                language: {                    
+                language: {
                     url: "{{ asset('resources/js/language-pt-br-datatables.json') }}"
-                },
+                }
             });
         });
         

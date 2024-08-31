@@ -168,6 +168,7 @@ class WeatherController extends Controller
                         'nebulosidade' => optional($report->cloud)->cloudiness . ' %',
                         'condicao_principal' => $condition->main,
                         'descricao_condicao' => $condition->description,
+                        'icon_code_condicao' => $condition->icon,
                     ];
                 })->all();
             });
