@@ -16,7 +16,7 @@ class WeatherController extends Controller
     public function fetchWeatherData(Request $request)
     {
         // Verifica se os inputs do formulário são nulos
-        if(($request->input('other-city') === null) && ($request->input('select-cidade') === null)){
+        if (($request->input('other-city') === null || $request->input('other-city') === '') && ($request->input('select-cidade') === null || $request->input('select-cidade') === '')) {
             
             return redirect()->route('weather');
 
