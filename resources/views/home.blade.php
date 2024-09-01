@@ -19,7 +19,7 @@
 
                         <div class="container">
                             <div class="row align-items-center">                                
-                                <form id="form-consult" method="POST" action="{{ route('fetchWeatherData') }}">
+                                <form id="form-consult" method="GET" action="{{ route('fetchWeatherData') }}">
                                     @csrf                                                                                                                
                                     <div class="col-md-12 col-sm-12 my-2">
                                         <label for="select-cidade">Cidade(Cidades Brasileiras)</label>

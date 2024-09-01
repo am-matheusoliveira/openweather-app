@@ -8,7 +8,7 @@ use App\Http\Controllers\WeatherController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 # Buscar e salvar os Dados da API
-Route::post('fetchWeatherData', [WeatherController::class, 'fetchWeatherData'])->name('fetchWeatherData');
+Route::get('fetchWeatherData', [WeatherController::class, 'fetchWeatherData'])->name('fetchWeatherData');
 
 # View de listagem dos Dados climáticas
 Route::get('/weather', [WeatherController::class, 'weather'])->name('weather');
