@@ -17,8 +17,7 @@ class WeatherController extends Controller
     {
         // Verifica se os inputs do formulário são nulos
         if ($request->has('input-teste')) {
-            echo('Oi');
-            exit;
+            
             return redirect()->route('weather');
 
         }else{
