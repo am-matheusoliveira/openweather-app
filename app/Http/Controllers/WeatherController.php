@@ -16,8 +16,8 @@ class WeatherController extends Controller
     public function fetchWeatherData(Request $request)
     {
         // Comparando o campo que veio do formulário com o valor salvo na sessão
-        if (session()->get('timestamp') === $request->input('timestamp')) {
-
+        if ((session()->get('timestamp') === $request->input('timestamp')) || !$request->filled('timestamp')) {
+            
             // Retornando para a view que lista as condições climáticas
             return redirect()->route('weather');
 
