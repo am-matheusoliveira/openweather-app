@@ -20,7 +20,8 @@
                         <div class="container">
                             <div class="row align-items-center">                                
                                 <form id="form-consult" method="GET" action="{{ route('fetchWeatherData') }}">
-                                    @csrf                                                                                                                
+                                    @csrf
+                                    <input type="hidden" name="timestamp" id="timestamp">
                                     <div class="col-md-12 col-sm-12 my-2">
                                         <label for="select-cidade">Cidade(Cidades Brasileiras)</label>
                                         <select class="form-control input-change" id="select-cidade" name="select-cidade" required>                                        
@@ -128,7 +129,12 @@
                 $('#form-consult').submit();
             else                
                 $('#btn-open-modal').click();
-        });  
+        });
+        
+        // Atualização do timestamp a cada 1 segundo (1000 milissegundos)
+        setInterval(function(){
+            $('#timestamp').val(Math.floor(Date.now() / 1000));
+        }, 1000);        
     });
 </script>
 @endsection
