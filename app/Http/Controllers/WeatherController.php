@@ -15,9 +15,10 @@ class WeatherController extends Controller
 {
     public function fetchWeatherData(Request $request)
     {
-        // Verifica se os inputs do formulário são nulos
+        // Comparando o campo que veio do formulário com o valor salvo na sessão
         if (session()->get('timestamp') === $request->input('timestamp')) {
-            
+
+            // Retornando para a view que lista as condições climáticas
             return redirect()->route('weather');
 
         }else{
@@ -69,7 +70,7 @@ class WeatherController extends Controller
                 ]);   
             }
             
-            // Limpando os inputs vindo do formulario
+            // Salvando o timestamp em uma sessão para comparação - impedir o reenvio do mesmo formulário
             session()->put('timestamp', $request->input('timestamp'));
 
             // VERIFICA SE TEVE SUCESSO NA REQUISIÇÃO
