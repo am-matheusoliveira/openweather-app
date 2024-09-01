@@ -73,6 +73,9 @@ class WeatherController extends Controller
             $request->input('other-city', null);
             $request->input('select-cidade', null);
 
+            $request->input('other-city', '');
+            $request->input('select-cidade', '');            
+
             // VERIFICA SE TEVE SUCESSO NA REQUISIÇÃO
             if ($response->successful()) {
                 $data = $response->json();
