@@ -172,7 +172,7 @@
                     },
                 ],
                 language: {
-                    url: "{{ asset('resources/js/language-pt-br-datatables.json') }}"
+                    url: "{{ config('app.asset_path') }}/js/language-pt-br-datatables.json"
                 }
             });
         });

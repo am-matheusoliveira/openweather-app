@@ -11,7 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        
+        $middleware->append([
+            'redirect.public' => \App\Http\Middleware\RedirectIfPublicInUrl::class,
+            'CheckPort' => \App\Http\Middleware\CheckPort::class,
+        ]);
+
         $middleware->alias([            
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         ]);
