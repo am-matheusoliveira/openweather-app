@@ -168,11 +168,18 @@
                     {data: 'descricao_condicao', name: 'descricao_condicao'},
                     {data: 'icon_code_condicao', name: 'icon_code_condicao', 
                         render: function(data, type, row) { 
-                            return '<img src="http://openweathermap.org/img/wn/'+data+'.png" alt="Weather Icon">'; }
+                            return '<img src="http://openweathermap.org/img/wn/'+data+'.png" alt="Weather Icon">'; 
+                        }
                     },
                 ],
                 language: {
-                    url: "{{ config('app.asset_path') }}/js/language-pt-br-datatables.json"
+                    url: "{{ config('app.asset_path') }}/js/language-pt-br-datatables.json",
+                    paginate: {
+                        first: '<i class="fas fa-angle-double-left"></i>',
+                        last: '<i class="fas fa-angle-double-right"></i>',
+                        next: '<i class="fas fa-chevron-right"></i>',
+                        previous: '<i class="fas fa-chevron-left"></i>'
+                    }
                 }
             });
         });
