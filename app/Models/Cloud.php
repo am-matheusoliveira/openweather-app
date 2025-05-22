@@ -21,5 +21,11 @@ class Cloud extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'report_id', 'cloudiness', 'created_at', 'updated_at'];
+    protected $fillable = [
+        'id',
+        'report_id',
+        'cloudiness',
+        'created_at',
+        'updated_at'
+    ];
 }

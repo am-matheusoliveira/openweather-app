@@ -78,20 +78,19 @@
 @section('footer')
 
 <script>
-    $(document).ready(function(event){
+    document.addEventListener('DOMContentLoaded', function(){
 
         // DEFINIR PRIMEIRA POSIÇÃO OU VAZIO NO REFRESH PAGE
-        $('#select-cidade').val('').change();
-        $('#other-city').val('');
-
+        jQuery('#select-cidade').val('').change();
+        jQuery('#other-city').val('');
+        
         // CONFIGURAÇÃO DO PLUGIN SELECT2
-        $('#select-cidade').select2({            
+        jQuery('#select-cidade').select2({
             theme: 'bootstrap-5',
             width: '100%',
             "language": {
                 "noResults": function(){
                     return "Nenhum registro encontrado!";
-
                 }
             }
         });
@@ -100,40 +99,40 @@
         var campo_alterado = false; 
 
         // MONITORA MUDANÇAS NOS INPUTS
-        $('.input-change').change(function(event){
+        jQuery('.input-change').change(function(event){
             
             // CAMPO VINDO DO EVENTO ON-CHANGE
-            let campo_name = $(this).attr('name');
+            let campo_name = jQuery(this).attr('name');
 
             if(campo_name === 'select-cidade' && !campo_alterado){
                 campo_alterado = true;
-                $('#other-city').val('');
+                jQuery('#other-city').val('');
                 campo_alterado = false;
 
             };
 
             if(campo_name === 'other-city' && !campo_alterado){
                 campo_alterado = true;
-                $('#select-cidade').val('').change();
+                jQuery('#select-cidade').val('').change();
                 campo_alterado = false;
             }
             
         });
 
         // BOTÃO PARA CONSULTAR A API
-        $('#btn-consultar').click(function(event){
+        jQuery('#btn-consultar').click(function(event){
             event.preventDefault();
 
             // VERIFICA SE A CIDADE SELECIONADA OU DIGITADA E VAZIO
-            if($('#select-cidade').val() != '' || $('#other-city').val() != '')
-                $('#form-consult').submit();
+            if(jQuery('#select-cidade').val() != '' || jQuery('#other-city').val() != '')
+                jQuery('#form-consult').submit();
             else                
-                $('#btn-open-modal').click();
+                jQuery('#btn-open-modal').click();
         });
         
         // Atualização do timestamp a cada 1 segundo (1000 milissegundos)
         setInterval(function(){
-            $('#timestamp').val(Math.floor(Date.now() / 1000));
+            jQuery('#timestamp').val(Math.floor(Date.now() / 1000));
         }, 1000);        
     });
 </script>

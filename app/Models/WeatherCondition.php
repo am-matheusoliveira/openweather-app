@@ -21,5 +21,14 @@ class WeatherCondition extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'report_id', 'condition_id', 'main', 'description', 'icon', 'created_at', 'updated_at'];
+    protected $fillable = [
+        'id',
+        'report_id',
+        'condition_id',
+        'main',
+        'description',
+        'icon',
+        'created_at',
+        'updated_at'
+    ];
 }

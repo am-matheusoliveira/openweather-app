@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use App\Models\City;
-use App\Models\WeatherReport;
-use App\Models\WeatherCondition;
 use App\Models\Wind;
 use App\Models\Cloud;
+use Illuminate\Http\Request;
+use App\Models\WeatherReport;
+use App\Models\WeatherCondition;
+use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
 
 class WeatherController extends Controller
@@ -43,7 +43,7 @@ class WeatherController extends Controller
             ];
 
             // CHAVE DE ACESSO A API 
-            $apiKey = '4f3124d762673f41dd1032b718b0ea83';
+            $apiKey = config('app.OPENWEATHERMAP_API_KEY');
 
             // VARIAVEL QUE RECEBE-RA A RESPOSTA JSON
             $response = '';
@@ -67,7 +67,7 @@ class WeatherController extends Controller
                     'appid' => $apiKey,
                     'units' => 'metric',
                     'lang' => 'pt_br'
-                ]);   
+                ]);
             }
             
             // Salvando o timestamp em uma sessão para comparação - impedir o reenvio do mesmo formulário

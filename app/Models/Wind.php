@@ -15,11 +15,18 @@ class Wind extends Model
      * @var string
      */
     protected $table = 'wind';
-
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'report_id', 'speed', 'direction', 'created_at', 'updated_at']; 
+    protected $fillable = [
+        'id',
+        'report_id',
+        'speed',
+        'direction',
+        'created_at',
+        'updated_at'
+    ];
 }

@@ -21,7 +21,23 @@ class WeatherReport extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'city_id', 'timezone', 'temperature', 'feels_like', 'temp_min', 'temp_max', 'pressure', 'humidity', 'visibility', 'timestamp', 'sunrise', 'sunset', 'created_at', 'updated_at'];
+    protected $fillable = [
+        'id',
+        'city_id',
+        'timezone',
+        'temperature',
+        'feels_like',
+        'temp_min',
+        'temp_max',
+        'pressure',
+        'humidity',
+        'visibility',
+        'timestamp',
+        'sunrise',
+        'sunset',
+        'created_at',
+        'updated_at'
+    ];
 
     // Relacionamento das tabelas
     public function city()
