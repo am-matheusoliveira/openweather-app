@@ -5,7 +5,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js',
+                'resources/css/app.css',
+                'resources/css/datatables/datatables.custom.css',
+                'resources/css/globalcss/globalcss.css',
+                'resources/js/app.js',
             ],
             refresh: true,
         }),
@@ -15,4 +18,7 @@ export default defineConfig({
             "@": "/resources/js"
         }
     },
+    build: {
+        chunkSizeWarningLimit: 1000
+    }
 });
