@@ -1,139 +1,97 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-
-                <!-- OPÇÕES DO SISTEMA  -->
-                <div class="card-header">
-                    <strong>{{ __('Menu do sistema') }}</strong>
-                </div>
-                
-                <div class="card-body">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong>Consultar previsão do tempo por cidade</strong>
-                        </div>
-
-                        <div class="container">
-                            <div class="row align-items-center">                                
-                                <form id="form-consult" method="GET" action="{{ route('fetchWeatherData') }}">
-                                    @csrf
-                                    <input type="hidden" name="timestamp" id="timestamp">
-                                    <div class="col-md-12 col-sm-12 my-2">
-                                        <label for="select-cidade">Cidade(Cidades Brasileiras)</label>
-                                        <select class="form-control input-change" id="select-cidade" name="select-cidade" required>                                        
-                                            <option value="">Escolha uma Cidade</option>    
-                                            @if (count($result_cidade) > 0)
-                                                @foreach ($result_cidade as $cidade)
-                                                    <option value="{{ $cidade->id }}">{{ $cidade->id }} - {{ $cidade->name }} - {{ $cidade->country }}</option>
-                                                @endforeach
-                                            @endif                                            
-                                        </select>                                        
-                                    </div>
-                                    
-                                    <div class="col-md-12 col-sm-12 my-2">
-                                        <label for="select-cidade">Não encontrou sua Cidade ?</label>
-                                        <input type="text" class="form-control bg-white input-change" id="other-city" name="other-city" placeholder="Digite o nome da Cidade">
-                                    </div>
-    
-                                    <div class="col-md-5 col-sm-12 my-2">
-                                        <button class="btn btn-primary w-100" id="btn-consultar">Consultar</button>
-                                    </div>
-                                </form>        
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary visually-hidden" id="btn-open-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">Launch demo modal</button>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Selecione ou digite o nome de uma Cidade!
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+    {{-- Skeleton Form - Pre Carregador do Form Real --}}
+    <div id="skeleton-form-select-city" class="placeholder-glow d-flex justify-content-center align-items-center p-4 mt-5 border border-primary rounded-2 shadow-lg mx-auto w-100" style="max-width: 750px;">
+        <div class="w-100">
+            <div class="mb-2">
+                <span class="placeholder rounded-2 w-25"></span>
+                <span class="mt-1 placeholder placeholder-lg rounded-2 w-100"></span>
+            </div>
+            
+            <div class="mb-2">
+                <span class="placeholder rounded-2 w-25"></span>
+                <div class="mt-1 d-flex gap-2">
+                    <span class="placeholder placeholder-lg rounded-2 w-75"></span>
+                    <span class="placeholder placeholder-lg rounded-2 w-25"></button>
+                </div>                
             </div>
         </div>
     </div>
-</div>
+    
+    {{-- Form para consulta da previsão do tempo --}}
+    <div id="form-select-city" class="d-none d-flex justify-content-center align-items-center p-4 mt-5 border border-primary rounded-2 shadow-lg mx-auto w-100" style="max-width: 750px;">
+        <form action="{{ route('fetchWeatherData') }}" method="GET" id="form-consult" class="w-100">
+            @csrf
+            <div class="mb-2">
+                <label for="select-cidade">Cidade(Cidades Brasileiras)</label>
+                <select class="form-control input-change" id="select-cidade" name="select-cidade">
+                    <option value="">Selecione uma cidade</option>
+                    @if (count($result_cidade) > 0)
+                        @foreach ($result_cidade as $cidade)
+                            <option value="{{ $cidade->id }}">{{ $cidade->name }} - {{ $cidade->country }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            
+            <div class="mb-2">
+                <label for="other-city">Não encontrou sua Cidade ?</label>
+                <div class="d-flex gap-2">
+                    <input type="text" class="form-control bg-white input-change w-100" id="other-city" name="other-city" placeholder="Pesquise uma cidade">
+                    <button class="btn btn-primary w-md-25" id="btn-consultar">Consultar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    {{-- Linha mais Card com a nova previsão consultada --}}
+    <hr id="hrNewData" class="d-flex flex-column flex-md-row justify-content-center align-items-center mx-auto my-4 w-100 bg-light d-none">
+    <div id="divDivNewData" class="d-flex flex-column p-4 m-2 gap-2 border border-primary rounded-2 shadow-lg mx-auto w-100 placeholder-glow d-none">
+        
+        <div class="d-flex justify-content-center align-items-center p-0 m-0">
+            <span id="new-skeleto-title" class="placeholder placeholder-lg rounded-2 w-25"></span>            
+            <h4 id="new-h4-title" class="text-center d-none">Clima em Tempo Real</h4>
+        </div>        
+        
+        <div id="divNewData" class="d-flex flex-wrap justify-content-around align-items-center gap-2"></div>
+    </div>
+    
+    {{-- Linha mais Card com os previsões anteriores --}}
+    <hr id="hrData" class="d-flex flex-column flex-md-row justify-content-center align-items-center mx-auto my-4 w-100 bg-light">    
+    <div id="divDivData" class="d-flex flex-column p-4 m-2 gap-2 border border-primary rounded-2 shadow-lg mx-auto w-100 placeholder-glow">
+        <div class="d-flex justify-content-center align-items-center p-0 m-0">
+            <span id="skeleto-title" class="placeholder placeholder-lg rounded-2 w-50"></span>
+            <h4 id="h4-title" class="d-none"></h4>
+        </div>
+        
+        <div id="divData" class="d-flex flex-wrap justify-content-around align-items-center gap-2"></div>
+    </div>
+    
+    {{-- Modal de alerta para o usuário selecionar uma cidade --}}
+    <div class="modal fade" id="selectCityModal" tabindex="-1" aria-labelledby="selectCityModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="selectCityModalLabel">Atenção</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Selecione ou digite o nome de uma Cidade!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{-- Toast Container --}}
+    <div class="toast-container position-fixed bottom-0 start-0 p-2">
+        <div id="toastContainer" class="toast fade show bg-white" role="alert" aria-live="assertive" aria-atomic="true"></div>
+    </div>
 @endsection
 
 @section('footer')
-
-<script>
-    document.addEventListener('DOMContentLoaded', function(){
-
-        // DEFINIR PRIMEIRA POSIÇÃO OU VAZIO NO REFRESH PAGE
-        jQuery('#select-cidade').val('').change();
-        jQuery('#other-city').val('');
-        
-        // CONFIGURAÇÃO DO PLUGIN SELECT2
-        jQuery('#select-cidade').select2({
-            theme: 'bootstrap-5',
-            width: '100%',
-            "language": {
-                "noResults": function(){
-                    return "Nenhum registro encontrado!";
-                }
-            }
-        });
-
-        // VARIAVEL AUXILIAR - DEFINE SE UM CAMPO FOI ALTERADO OU NÃO
-        var campo_alterado = false; 
-
-        // MONITORA MUDANÇAS NOS INPUTS
-        jQuery('.input-change').change(function(event){
-            
-            // CAMPO VINDO DO EVENTO ON-CHANGE
-            let campo_name = jQuery(this).attr('name');
-
-            if(campo_name === 'select-cidade' && !campo_alterado){
-                campo_alterado = true;
-                jQuery('#other-city').val('');
-                campo_alterado = false;
-
-            };
-
-            if(campo_name === 'other-city' && !campo_alterado){
-                campo_alterado = true;
-                jQuery('#select-cidade').val('').change();
-                campo_alterado = false;
-            }
-            
-        });
-
-        // BOTÃO PARA CONSULTAR A API
-        jQuery('#btn-consultar').click(function(event){
-            event.preventDefault();
-
-            // VERIFICA SE A CIDADE SELECIONADA OU DIGITADA E VAZIO
-            if(jQuery('#select-cidade').val() != '' || jQuery('#other-city').val() != '')
-                jQuery('#form-consult').submit();
-            else                
-                jQuery('#btn-open-modal').click();
-        });
-        
-        // Atualização do timestamp a cada 1 segundo (1000 milissegundos)
-        setInterval(function(){
-            jQuery('#timestamp').val(Math.floor(Date.now() / 1000));
-        }, 1000);        
-    });
-</script>
+    @vite(['resources/js/pages/climate-reports/weather-reports.js'])
 @endsection

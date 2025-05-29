@@ -6,9 +6,9 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/css/datatables/datatables.custom.css',
                 'resources/css/globalcss/globalcss.css',
                 'resources/js/app.js',
+                'resources/js/pages/climate-reports/weather-reports.js'
             ],
             refresh: true,
         }),
