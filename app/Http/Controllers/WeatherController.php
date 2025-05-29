@@ -9,20 +9,16 @@ use Illuminate\Http\Request;
 use App\Models\WeatherReport;
 use App\Models\WeatherCondition;
 use Illuminate\Support\Facades\Http;
-use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class WeatherController extends Controller
 {
-    public function fetchWeatherData(Request $request)
-    {
-        // Comparando o campo que veio do formulário com o valor salvo na sessão
-        if ((session()->get('timestamp') === $request->input('timestamp')) || !$request->filled('timestamp')) {
-            
-            // Retornando para a view que lista as condições climáticas
-            return redirect()->route('weather');
+    public function __construct(){
+        Carbon::setLocale('pt_BR');
+    }
 
-        }else{
-
+    public function fetchWeatherData(Request $request){
+        try{                            
             // TRADUÇÃO DAS CONDIÇÕES CLIMATICAS
             $translations = [
                 'Clear' => 'Céu limpo',
@@ -39,15 +35,20 @@ class WeatherController extends Controller
                 'Sand' => 'Areia',
                 'Ash' => 'Cinzas',
                 'Squall' => 'Tempestade',
-                'Tornado' => 'Tornado',
+                'Tornado' => 'Tornado'
             ];
-
+            
+            $erros = [
+                404 => 'Cidade informada não foi encontrada.',
+                401 => 'Chave de API inválida. Consulte https://openweathermap.org/faq#error401 para mais informações.'
+            ];
+            
             // CHAVE DE ACESSO A API 
             $apiKey = config('app.OPENWEATHERMAP_API_KEY');
-
+            
             // VARIAVEL QUE RECEBE-RA A RESPOSTA JSON
             $response = '';
-
+            
             // SE O USUÁRIO ESCOLHEU UMA CIDADE
             if($request->filled('select-cidade')){
                 $cityId = $request->input('select-cidade');
@@ -58,23 +59,39 @@ class WeatherController extends Controller
                     'lang' => 'pt_br'
                 ]);
             }
-
+                
             // SE O USUÁRIO DIGITOU UMA CIDADE
             if($request->filled('other-city')){
                 $cityName = $request->input('other-city');
                 $response = Http::get("http://api.openweathermap.org/data/2.5/weather", [
-                    'q' => $cityName,
+                    'q' => ($cityName . ', BR'),
                     'appid' => $apiKey,
                     'units' => 'metric',
                     'lang' => 'pt_br'
                 ]);
             }
             
-            // Salvando o timestamp em uma sessão para comparação - impedir o reenvio do mesmo formulário
-            session()->put('timestamp', $request->input('timestamp'));
-
+            // $response->successful();  // status 2xx
+            // $response->failed();      // status 4xx ou 5xx
+            // $response->clientError(); // status 4xx
+            // $response->serverError(); // status 5xx
+            // $response->status();      // código numérico (ex: 404)
+            // $response->json();        // acessa o corpo da resposta JSON
+            // $response->body();        // pega o conteúdo bruto (string)
+            
+            if($response->clientError()){
+                $status = $response->status();
+                $message = $erros[$status];
+                
+                $arrayResponse = [
+                    'message' => $message
+                ];
+                
+                return response()->json($arrayResponse, $status);
+            }
+            
             // VERIFICA SE TEVE SUCESSO NA REQUISIÇÃO
-            if ($response->successful()) {
+            if($response->successful()){
                 $data = $response->json();
 
                 // Salvar cidade
@@ -87,7 +104,7 @@ class WeatherController extends Controller
                         'latitude'  => $data['coord']['lat']
                     ]
                 );
-
+                
                 // Salvar relatório de clima
                 $report = WeatherReport::create([
                     'city_id'     => $city->id,
@@ -113,7 +130,7 @@ class WeatherController extends Controller
                         'description'  => $condition['description'],
                         'icon'         => $condition['icon']
                     ]);
-
+                    
                     // Configurando os campos que seram apresentados na View a partir do JSON da API
                     $data['dt']                    = date('d/m/Y H:i:s', ($data['dt']             + $data['timezone']));
                     $data['sys']['sunset']         = date('d/m/Y H:i:s', ($data['sys']['sunset']  + $data['timezone']));
@@ -127,62 +144,60 @@ class WeatherController extends Controller
                     'speed'     => $data['wind']['speed'],
                     'direction' => $data['wind']['deg']
                 ]);
-
+                
                 // Salvar nuvens
                 Cloud::create([
                     'report_id'  => $report->id,
                     'cloudiness' => $data['clouds']['all']
                 ]);
-
-                return redirect()->route('weather')->with(['messageSuccess' => 'Dados salvos com sucesso!', 'weatherData' => $data]);            
+                
+                $resultado = [
+                    'nome_cidade'        => $data['name'],
+                    'pais'               => $data['sys']['country'],
+                    'temperatura'        => number_format($data['main']['temp'], 2) . ' °C',
+                    'sensacao_termica'   => number_format($data['main']['feels_like'], 2) . ' °C',
+                    'temp_minima'        => number_format($data['main']['temp_min'], 2) . ' °C',
+                    'temp_maxima'        => number_format($data['main']['temp_max'], 2) . ' °C',
+                    'umidade'            => $data['main']['humidity'] . ' %',
+                    'timestamp'          => Carbon::createFromFormat('d/m/Y H:i:s', $data['dt'])->translatedFormat('d \d\e F \d\e Y, H:i'),
+                    'velocidade_vento'   => number_format($data['wind']['speed'], 2) . ' m/s',
+                    'descricao_condicao' => ucfirst($data['weather'][0]['description']),
+                    'icon_code_condicao' => $data['weather'][0]['icon']
+                ];
+                
+                return response()->json($resultado, $data['cod']);
             }
-
-            return redirect()->route('weather')->with(['messageDanger' => 'Erro ao consultar a API.']);
+        }catch(\Throwable $th){
+            return response()->json(['message' => 'Falha na requisição.'], 400);
         }
     }
     
-    // Retorna para a view de listagem dos Dados climáticas
-    public function weather(){
-        
-        // Retorna para a view com os dados acima
-        return view('weather', ['data' => session('weatherData')]);
-    }
-
     // FUNÇÃO QUE RETORNA OS DADOS DA VIEW 'weather' E RENDERIZA O DataTables
-    public function weatherData(Request $request){    
-
-        if ($request->ajax()) {
-            
-            // Buscando os dados que ira popular o DataTables
-            $result_weather = WeatherReport::with(['city', 'wind', 'cloud', 'conditions'])
-            ->get()
-            ->flatMap(function($report) {
-                return $report->conditions->map(function($condition) use ($report) {
-                    return [
-                        'nome_cidade' => $report->city->name,
-                        'pais' => $report->city->country,
-                        'temperatura' => $report->temperature .' °C',
-                        'sensacao_termica' => $report->feels_like .' °C',
-                        'temp_minima' => $report->temp_min . ' °C',
-                        'temp_maxima' => $report->temp_max . ' °C',
-                        'pressao' => $report->pressure . ' hPa',
-                        'umidade' => $report->humidity . ' %',
-                        'visibilidade' => $report->visibility . ' m',
-                        'timestamp'     => date('d/m/Y H:i:s', strtotime($report->timestamp)),
-                        'nascer_do_sol' => date('d/m/Y H:i:s', strtotime($report->sunrise)),
-                        'por_do_sol'    => date('d/m/Y H:i:s', strtotime($report->sunset)),
-                        'velocidade_vento' => optional($report->wind)->speed . ' m/s',
-                        'direcao_vento' => optional($report->wind)->direction . ' °',
-                        'nebulosidade' => optional($report->cloud)->cloudiness . ' %',
-                        'condicao_principal' => $condition->main,
-                        'descricao_condicao' => $condition->description,
-                        'icon_code_condicao' => $condition->icon,
-                    ];
-                })->all();
-            });
-
-            // Retornando o componente populado
-            return Datatables::of($result_weather)->make(true);
-        }
+    public function weatherData(){
+        // Buscando os dados que ira popular o DataTables
+        $climateReportData = WeatherReport::with(['city', 'wind', 'cloud', 'conditions'])
+        ->get()
+        ->sortByDesc('timestamp')
+        ->flatMap(function($report){
+            return $report->conditions->map(function($condition) use ($report){
+                return [
+                    'nome_cidade'        => $report->city->name,
+                    'pais'               => $report->city->country,
+                    'temperatura'        => $report->temperature .' °C',
+                    'sensacao_termica'   => $report->feels_like .' °C',
+                    'temp_minima'        => $report->temp_min . ' °C',
+                    'temp_maxima'        => $report->temp_max . ' °C',
+                    'umidade'            => $report->humidity . ' %',
+                    'timestamp'          => Carbon::parse($report->timestamp)->translatedFormat('d \d\e F \d\e Y, H:i'),
+                    'velocidade_vento'   => optional($report->wind)->speed . ' m/s',
+                    'descricao_condicao' => ucfirst($condition->description),
+                    'icon_code_condicao' => $condition->icon
+                ];
+            })
+            ->values()
+            ->all();
+        });
+        
+        return response()->json($climateReportData, 200);
     }
 }

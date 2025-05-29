@@ -19,12 +19,3 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
-
-# Bloqueia acesso ao .env
-<FilesMatch .env>
-    Require all denied
-    
-    # Internal Server Error
-    # Order allow,deny
-        # Deny from all
-</FilesMatch>

@@ -1,12 +1,15 @@
 {
-  "resources/css/app.css": {
-    "file": "assets/app-dHeZ0IHL.css",
-    "src": "resources/css/app.css",
-    "isEntry": true
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
+    "file": "assets/bootstrap-icons-BeopsB42.woff",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
   },
-  "resources/css/datatables/datatables.custom.css": {
-    "file": "assets/datatables-Dve2ll8N.css",
-    "src": "resources/css/datatables/datatables.custom.css",
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
+    "file": "assets/bootstrap-icons-mSm7cUeB.woff2",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-LVyW0D6-.css",
+    "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/globalcss/globalcss.css": {
@@ -15,9 +18,15 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-7zVoaiLY.js",
+    "file": "assets/app-DzHljXDZ.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/pages/climate-reports/weather-reports.js": {
+    "file": "assets/weather-reports-DUEZfsmB.js",
+    "name": "weather-reports",
+    "src": "resources/js/pages/climate-reports/weather-reports.js",
     "isEntry": true
   }
 }

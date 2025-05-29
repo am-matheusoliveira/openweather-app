@@ -10,8 +10,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 # Buscar e salvar os Dados da API
 Route::get('fetchWeatherData', [WeatherController::class, 'fetchWeatherData'])->name('fetchWeatherData');
 
-# View de listagem dos Dados climáticas
-Route::get('/weather', [WeatherController::class, 'weather'])->name('weather');
-
-# Rota que popula os Dados do Plugin Datatables
+# Rota que retorna os relatórios das condições climáticas
 Route::get('weatherData', [WeatherController::class, 'weatherData'])->name('weatherData');

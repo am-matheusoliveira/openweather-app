@@ -24,6 +24,3 @@ select2();
 */
 // ou
 // window.select2 = select2(); 
-
-import DataTable from 'datatables.net-bs5';
-window.DataTable = DataTable;

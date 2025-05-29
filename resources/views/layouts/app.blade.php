@@ -8,32 +8,18 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- FavIcon -->
-    <link rel="icon" href="{{ asset('clapperboard.ico') }}" type="image/x-icon">
+    <!-- FavIcon -->    
+    <link rel="icon" href="{{ asset('climate-change.png') }}" type="image/png">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {{-- System Title --}}
+    <title>{{ $title ?? config('app.name') }}</title>
 
     <!-- Scripts -->
-    @vite([
-        'resources/css/app.css',
-        'resources/css/datatables/datatables.custom.css',
-        'resources/css/globalcss/globalcss.css',
-        'resources/js/app.js'
-    ])
-    
+    @vite(['resources/css/app.css', 'resources/css/globalcss/globalcss.css', 'resources/js/app.js'])
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <strong><a class="navbar-brand" href="{{ url('/') }}"> {{ config('app.name', 'Laravel') }} </a></strong>
-            </div>
-        </nav>
-        
-        <main class="pt-4">
+    <div class="container" id="app">
+        <main>
             @yield('content')
         </main>
         
