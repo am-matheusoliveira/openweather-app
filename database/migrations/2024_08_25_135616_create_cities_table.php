@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('country', 3);
-            $table->float('longitude');
-            $table->float('latitude');
+            $table->float('longitude')->nullable(true);
+            $table->float('latitude')->nullable(true);
             $table->timestamps();
         });
     }    

@@ -21,9 +21,33 @@ function initSelect2() {
     jQuery('#select-cidade').select2({
         theme: 'bootstrap-5',
         width: '100%',
+        placeholder: 'Busque por uma cidade brasileira..',
         language: {
-            noResults: () => "Nenhum registro encontrado!"
-        }
+            errorLoading: () => {
+                return 'Erro ao carregar os resultados.';
+            },            
+            noResults: () => {
+                return 'Nenhum resultado encontrado';
+            },
+            searching: () => {
+                return 'Buscando...';
+            }
+        },
+		ajax: {
+			url: `${APP_URL}/api/fetch/cities`,
+            delay: 150,
+			dataType: 'json',
+			data: (params) => {
+        		return {
+            		q: params.term,
+        		};
+        	},
+			processResults: (data) => {
+				return {
+					results: data
+				};
+			}
+		}
     });
 }
 
@@ -52,21 +76,21 @@ function handleInputSync() {
 function handleFormSubmission() {
     jQuery('#btn-consultar').click(async function (event) {
         event.preventDefault();
-
+        
         const btn = jQuery(this);
         const originalText = btn.html();
-
-        const cidadeSelecionada = jQuery('#select-cidade').val().trim();
-        const cidadeDigitada = jQuery('#other-city').val().trim();
-
+        
+        const cidadeSelecionada = (jQuery('#select-cidade').val() || '').trim();
+        const cidadeDigitada = (jQuery('#other-city').val() || '').trim();
+        
         if (cidadeSelecionada || cidadeDigitada) {
             btn.attr('disabled', true).addClass('d-flex align-items-center gap-2 justify-content-center').html(`
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 <span>Consultando...</span>
             `);
-
+            
             await fetchNewWeatherData();
-
+            
             btn.html(originalText).attr('disabled', false).removeClass('d-flex align-items-center gap-2 justify-content-center');
         } else {
             new bootstrap.Modal(document.getElementById('selectCityModal')).show();
@@ -203,15 +227,14 @@ async function fetchNewWeatherData() {
     try {
         const selectValue = document.getElementById("select-cidade").value.trim();
         const inputValue = document.getElementById("other-city").value.trim();
-
+        
         if (!inputValue && !selectValue) return;
-
+        
         const param = inputValue
             ? `other-city=${encodeURIComponent(inputValue)}`
             : `select-cidade=${encodeURIComponent(selectValue)}`;
-
-        const url = `http://openweather-app.local/fetchWeatherData?${param}`;
-        const response = await fetch(url);
+        
+        const response = await fetch(`${APP_URL}/api/fetch/weather/current?${param}`);
         const responseData = await response.json();
 
         if (!response.ok) {
@@ -253,16 +276,16 @@ async function fetchNewWeatherData() {
 // Consulta previsões salvas
 async function fetchWeatherData() {
     try {
-        const response = await fetch('http://openweather-app.local/weatherData');
+        const response = await fetch(`${APP_URL}/api/fetch/weather/reports`);
         const responseData = await response.json();
-
+        
         if (!response.ok) {
             showToast('Erro', responseData.message || `Erro na requisição (${response.status})`, 'danger');
             return;
         }
- 
+        
         const weatherItems = Array.isArray(responseData) ? responseData : [responseData];
- 
+        
         const skeletoTitle = document.getElementById('skeleto-title');
         const h4Title = document.getElementById('h4-title');
         const containerDivData = document.getElementById('divData');

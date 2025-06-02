@@ -21,19 +21,12 @@
     
     {{-- Form para consulta da previsão do tempo --}}
     <div id="form-select-city" class="d-none d-flex justify-content-center align-items-center p-4 mt-5 border border-primary rounded-2 shadow-lg mx-auto w-100" style="max-width: 750px;">
-        <form action="{{ route('fetchWeatherData') }}" method="GET" id="form-consult" class="w-100">
+        <form action="{{ url('/api/fetch/weather/current') }}" method="GET" id="form-consult" class="w-100">
             @csrf
             <div class="mb-2">
                 <label for="select-cidade">Cidade(Cidades Brasileiras)</label>
-                <select class="form-control input-change" id="select-cidade" name="select-cidade">
-                    <option value="">Selecione uma cidade</option>
-                    @if (count($result_cidade) > 0)
-                        @foreach ($result_cidade as $cidade)
-                            <option value="{{ $cidade->id }}">{{ $cidade->name }} - {{ $cidade->country }}</option>
-                        @endforeach
-                    @endif
-                </select>
-            </div>
+                <select class="form-control input-change" id="select-cidade" name="select-cidade"></select>
+            </div>                  
             
             <div class="mb-2">
                 <label for="other-city">Não encontrou sua Cidade ?</label>
@@ -93,5 +86,8 @@
 @endsection
 
 @section('footer')
+    <script>
+        const APP_URL = '{{ config('app.url') }}';
+    </script>
     @vite(['resources/js/pages/climate-reports/weather-reports.js'])
 @endsection
