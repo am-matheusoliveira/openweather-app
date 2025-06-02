@@ -8,7 +8,7 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-LVyW0D6-.css",
+    "file": "assets/app-DcVI620N.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -24,7 +24,7 @@
     "isEntry": true
   },
   "resources/js/pages/climate-reports/weather-reports.js": {
-    "file": "assets/weather-reports-DUEZfsmB.js",
+    "file": "assets/weather-reports-YuZHCLHV.js",
     "name": "weather-reports",
     "src": "resources/js/pages/climate-reports/weather-reports.js",
     "isEntry": true

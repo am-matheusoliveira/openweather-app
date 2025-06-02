@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Home;
-
 class HomeController extends Controller
 {
     /**
@@ -21,13 +19,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */    
-    public function index(Home $home)
-    {
-        // Buscando as Cidades
-        $result_cidade = $home->cidade_select();
-           
+    public function index()
+    {      
         return view('home', [
-            'result_cidade' => $result_cidade,
             'title' => 'Relatórios Climáticos | Open Weather Map | API'
         ]);
     }
